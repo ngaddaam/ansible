@@ -1,0 +1,19 @@
+---
+- name: Setup of docker and required s/w's
+  hosts: all
+  tasks:
+    - name: Install python pip
+      apt:
+        name: python3-pip
+        state: present
+        update_cache: yes
+    - name: Dowload the docker script and run it and also install docker-py
+      shell: "{{item}}"
+      with_items:
+        - curl -fsSL https://get.docker.com -o install-docker.sh
+        - sh install-docker.sh
+    - name: Install docker-py
+      apt:
+        name: python3-docker-py
+        state: present
+...

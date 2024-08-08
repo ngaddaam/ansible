@@ -1,0 +1,16 @@
+---
+- name: Check if file1 f1 is present if not create a folder f1
+  hosts: all
+  tasks:
+    - name: Check for f1 file
+      stat:
+        path: /home/ubuntu/f1
+      register: a
+    - name: display output of the above module
+      debug:
+        var: a
+    - name: Create folder f1 if file f1 is not present
+      file:
+        name: /home/ubuntu/f1
+        state: directory
+      when: a.stat.exists == false

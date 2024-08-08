@@ -1,0 +1,41 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+config.ssh.insert_key = false
+config.vm.provider :virtualbox do |vb|
+vb.customize ["modifyvm", :id, "--memory", "2048"]
+ end
+
+ 
+
+# control
+ config.vm.define "Controller" do |app|
+ app.vm.hostname = "Controller"
+ app.vm.box = "bento/ubuntu-22.04"
+ app.vm.network :private_network, ip: "10.10.10.94"
+ end
+
+config.vm.define "Server1" do |app|
+ app.vm.hostname = "Server1"
+ app.vm.box = "bento/ubuntu-22.04"
+ app.vm.network :private_network, ip: "10.10.10.95"
+ end
+
+config.vm.define "Server2" do |app|
+ app.vm.hostname = "Server2"
+ app.vm.box = "bento/ubuntu-22.04"
+ app.vm.network :private_network, ip: "10.10.10.96"
+ end
+
+
+
+
+
+ 
+
+
+ 
+ end
